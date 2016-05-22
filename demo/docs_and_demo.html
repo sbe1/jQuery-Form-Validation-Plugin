@@ -113,7 +113,7 @@ var formEvent = 'click'; // click, submit, etc.
 var eventElementId = 'submit_form'; // In this case, we're listening for a click event on a button with the ID <code>submit_form</code>
 
 // Catch the submit button click and call submit function
-$.validation.bind('form_container', 'click', '#submit_form', flagIfCorrect, callbackFunction, functionArgs);
+$.validation.bind('form_container', 'click', 'submit_form', flagIfCorrect, callbackFunction, functionArgs);
 &lt;/script&gt;</pre>
             <h3>Plugin Properties</h3>
             <p>There are two useful plugin properties that you can use in your on scripts to check if validation has been run on the form and if the inputs passed validation.</p>
