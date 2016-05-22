@@ -9,7 +9,9 @@ Features:
 - Should work with all versions of jQuery
 
 > This software is released under the following Creative Commons License:
+>
 > Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+>
 > http://creativecommons.org/licenses/by-sa/4.0/
 
 > Please see demo/docs_and_demo.html for full documentation and demos.

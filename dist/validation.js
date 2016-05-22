@@ -2,9 +2,11 @@
  * jQuery Form Validation Plugin
  * An improved form validation plugin for jQuery.
  * 
- * Supports:
- * -Unicode names and emails
+ * Features:
+ * -Full unicode names and emails
  * -Uses CSS classes and data tag attributes (as opposed to an ad hoc config file, like some other plugins)
+ * -Does 99% of what most people want for form validation while eliminating complex configuration
+ * -Tiny minified footprint
  * -Should work with all versions of jQuery
  * 
  * See readme.md or demo.html for documentation and examples.
