@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Form Validation Plugin Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/demo.css">
+    </head>
+    <body>
+        <h2>jQuery Form Validation Plugin: Documentation and Demos</h2>
+        <div class="container">
+            <h3 class="error-message">NOTE: No JavaScript/front end form validation solution is foolproof. It is, at best, a convenience that should never be relied on to ensure security/data validity. Always implement server side validation to complement front end validation.</h3>
+            <h3>Overview (<a href="#demos">click here</a> to jump down to the demos)</h3>
+            <p>This plugin provides a convenient means to implement validation on common HTML input fields. It supports validating any input element that supports the use of the jQuery <code>$('#element_id').val();</code> or <code>$('#element_id).is(':checked');</code> methods. The plugin supports unicode text, including emails that use unicode characters.</p>
+            <h3>Getting Started</h3>
+            <h3>Adding The Plugin to Your Page.</h3>
+            <p>Add something like the following to your HTML pages:<br>
+            <pre class="prettyprint">
+&lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/validation.min.js"&gt;&lt;/script&gt;</pre></p>
+            <h3>Required tag attributes and classes</h3>
+            <p>In order to use the plugin, you must supply certain attributes and classes in your form tags.</p>
+            <h4>Required CSS Class: validate; Rquired tag attribute: id</h4>
+            <p>All form input tags must include the CSS class <code>validate</code> to indicate to the plugin that it should validate this tag. At minimum, the validate tag will check if an input value is empty and display an error. You must also provide an <code>id</code> attribute that is unique from all other input ids so that the plugin can distinguish the input being validated from other inputs.</p><p>Ex: <code class="prettyprint">&lt;input type="text" name="my_input" id="my_input" class="validate" ... &gt;</code></p>
+            <h4>Optional CSS Classes: check-length, check-email, check-match, numbers-only, letters-only, alphanumeric-only, is-checked</h4>
+            <h4>check-length</h4>
+            <p>Checks the length of the input string. Requires at least one of the following <code>data</code> attributes <code>data-validation-length-min</code> and/or <code>data-validation-length-max</code>.</p><p>Ex: <code class="prettyprint">&lt;input type="text" name="my_input" id="my_input" class="validate check-length" data-validation-length-min="10" data-validation-length-max="100"  ... &gt;</code></p>
+            <h4>check-email</h4>
+            <p>Checks for a valid email address. Supports unicode character emails. For example, an email like this 伊昭傑@郵件.商務 is valid and will pass validation.</p><p>Ex: <code class="prettyprint">&lt;input type="text" name="email" id="email" class="validate check-email" ... &gt;</code></p>
+            <h4>check-match</h4>
+            <p>Checks whether the value of two inputs match. You must add the <code>data</code> attribute <code>data-validation-match</code> to one of the tags to be matched. The value of <code>data-validation-match</code> must be the CSS id of the <i>other</i> input to be matched.</p><p>Ex: <code class="prettyprint">&lt;input type="password" name="password" id="password" class="validate" ... &gt;</code><br><code class="prettyprint">&lt;input type="password" name="verify_password" id="verify_password" class="validate check-match" data-validation-match="password" ... &gt;</code></p>
+            <h4>numbers-only</h4>
+            <p>Checks if the user input is only numbers. Supports the use of the optional classes <code>allow-spaces</code> which permits numbers and spaces and <code>allow-special-characters</code> which permits the following characters often associated with formatted numbers: - / , . ( )</p>
+            <p>Ex: <code class="prettyprint">&lt;input type="text" name="phone_number" id="phone_number" class="validate numbers-only allow-spaces allow-special-characters" ... &gt;</code></p>
+            <h4>letters-only</h4>
+            <p>Checks if the user input is only letters. Supports the use of the optional classes <code>allow-spaces</code> which permits letters and spaces and <code>allow-special-characters</code> which permits all unicode letters as well as the following characters often found in first and last names: ' - _</p>
+            <p>Ex: <code class="prettyprint">&lt;input type="text" name="your_name" id="your_name" class="validate letters-only allow-spaces allow-special-characters" ... &gt;</code></p></p>
+            <h4>alphanumeric-only</h4>
+            <p>Checks if the user input is only alphanumeric characters. Supports all unicode alphabet characters by default. Supports the use of the optional class <code>allow-spaces</code> which permits alphanumeric characters and spaces.</p>
+            <p>Ex: <code class="prettyprint">&lt;input type="text" name="your_address" id="your_address" class="validate alphanumeric-only allow-spaces" ... &gt;</code></p>
+            <h4>is-checked</h4>
+            <p>Checks if a checkbox is checked.</p><p>Ex. <code class="prettyprint">&lt;input type="checkbox" name="confirm" id="confirm" class="validate is-checked" ... &gt;</code></p>
+            <h4>Multiple Tests on One Input</h4>
+            <p>It's very simple to perform multiple tests on a single input. Simply add the CSS classes associated with the tests you want to perform as well as the relevant <code>data</code> attributes.</p><p>Ex: <code class="prettyprint">&lt;input type="text" name="us_zip_code" id="us_zip_code" class="validate numbers-only check-length" data-validation-length-min="5" data-validation-length-max="5" ... &gt;</code></p>
+            <h3>Displaying Messages</h3>
+            <h4>Required HTML element for displaying messages</h4>
+            <p>You must provide <i>one</i> of these elements for <i>every</i> input tag you wish to validate. The ID of each message element must be exactly the same as the ID of the corresponding input element, but with the suffix <code>-message</code>. So, if your input tag has an ID of <code>email_address</code>, the ID of the message element must be <code>email_address-message</code></p>
+            <p><code class="prettyprint">&lt;div id="email_address-message" class="error-message hidden"&gt;&lt;/div&gt;</code></p>
+            <h4>Required CSS Classes for Displaying Messages.</h4>
+            <h4>error-alert</h4>
+            <p>This CSS class is added to the input element and changes the appearance of the element to inform the user that attention to this element is needed.</p>
+            <pre class="prettyprint">
+.error-alert {
+    border: #a94442 solid 1px;
+}</pre>
+            <h4>correct-alert</h4>
+            <p>This CSS class is added to the input element only if the alertIfCorrect flag has been set when binding the plugin to an HTML form or a container element. It changes the appearance of the element to inform the user that they have entered information into the input element correctly.</p>
+            <pre class="prettyprint">
+.correct-alert {
+    border: #5cb85c solid 1px;
+}</pre>
+            <h4>error-message</h4>
+            <p>This CSS class should style the message element when it becomes visible on an error. Here is an example style for this class:</p>
+            <pre class="prettyprint">
+.error-message {
+    color: #a94442;
+    font-weight: bold;
+}</pre>
+            <h4>hidden</h4>
+            <p>This CSS class will hide the message element. The plugin hides and shows the error message by adding and removing this class from a message element. If you are using <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>, there already is a <code>hidden</code> CSS class. If you need to create your own, here is an example:</p>
+            <pre class="prettyprint">
+.hidden {
+    display: none !important;
+}</pre>
+            <h4>Methods of Displaying a Validation Message</h4>
+            <h4>Method 1: Putting the message inside the message element</h4>
+            <pre class="prettyprint">
+&lt;input type="text" name="your_name" id="your_name" class="validate"&gt;
+&lt;div id="your_name-message" class="error-message hidden"&gt;You must enter your name.&lt;/div&gt;</pre>
+            <h4>Method 2: Using The data-error-message Attribute</h4>
+            <p></p>
+            <pre class="prettyprint">
+&lt;input type="text" name="your_name" id="your_name" class="validate" data-error-message="You must enter your name."&gt;
+&lt;div id="your_name-message" class="error-message hidden"&gt;&lt;/div&gt;</pre>
+            <h4>Binding the Plugin</h4>
+            <p>To enable the validation plugin, you must call a plugin method to bind it to either an HTML form or a container element that contains a collection of input elements.</p>
+            <h3>Binding to a Form</h3>
+            <p>Bind to an HTML form with the ID <code>submit-this-form</code></p>
+            <pre class="prettyprint">
+&lt;script&gt;
+var flagIfCorrect = true; // Add the correct-alert class to a correctly filled input element.
+
+$.validation.bindOnSubmit('submit-this-form', flagIfCorrect);
+&lt;/script&gt;</pre>
+            <h3>Binding to a Container</h3>
+            <p>Bind to an HTML container with the ID <code>form_container</code></p>
+            <pre class="prettyprint">
+&lt;script&gt;
+var flagIfCorrect = true; // Add the correct-alert class to a correctly filled input element.
+var returnClass = 'my-class'; // When you have a form where all fields are not validated, but you would like
+                              // the the form to submit when a user presses return in one of these non-required inputs.
+var callbackFunction = function () { console.log('Hello dere!'); } // A function for submitting the form or whatever
+                                                                   // callback you prefer.
+var functionArgs = ['arg1','arg2']; // An argument for the callback function. Need more than one argument?
+                                    // Make the argument an array and process that array as arguments from
+                                    // within your function.
+
+// Catch when a user hits the return key in an input field.
+$.validation.bindOnReturn('form_container', flagIfCorrect, returnClass, callbackFunction, functionArgs);
+
+
+var formEvent = 'click'; // click, submit, etc.
+var eventElementId = 'submit_form'; // In this case, we're listening for a click event on a button with the ID <code>submit_form</code>
+
+// Catch the submit button click and call submit function
+$.validation.bind('form_container', 'click', '#submit_form', flagIfCorrect, callbackFunction, functionArgs);
+&lt;/script&gt;</pre>
+            <h3>Plugin Properties</h3>
+            <p>There are two useful plugin properties that you can use in your on scripts to check if validation has been run on the form and if the inputs passed validation.</p>
+            <h4>$.validation.ran</h4>
+            <p>Contains a boolean value. Boolean true if validation ran on the form, boolean false if not.</p>
+            <h4>$.validation.passed</h4>
+            <p>Contains a boolean value. Boolean true if all inputs passed validation, boolean false if not.</p>
+            <p>Example usage:</p>
+            <pre class="prettyprint">
+if ($.validation.ran && $.validation.passed) {
+   // do something
+}
+            </pre>
+        </div>
+        <div class="container border_top margin_top_20"><a name="demos"></a></div>
+        <h2>jQuery Form Validation Plugin: Usage Examples</h2>
+        <div class="container">
+            <h3>Standard Form</h3>
+            <pre class="prettyprint width_100">
+&lt;form name="sample_form" action="#" method="post" id="sample_form"&gt;
+    &lt;div&gt
+
+        &lt;input type="text" name="your_name" id="your_name" placeholder="Enter your name."
+        class="validate letters-only allow-spaces check-length"
+        data-validation-length-min="3" data-validation-length-max="100"&gt;
+
+        &lt;div id="your_name-message" class="error-message hidden"&gt;You must enter a name between 3 and 100 characters.&lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;div&gt;
+
+        &lt;input type="text" name="email" id="email" placeholder="Enter your email."
+        class="validate check-email" data-error-message="You must enter a valid email address."&gt;
+
+        &lt;div id="email-message" class="error-message hidden"&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;div&gt;
+
+        &lt;input type="checkbox" name="my_checkbox" id="my_checkbox"
+        class="validate is-checked" data-error-message="This box must be checked."&gt;
+
+         &lt;div id="my_checkbox-message" class="error-message hidden"&gt;&lt;/div&gt; Check this box.
+
+    &lt;/div&gt;
+
+    &lt;button type="submit" name="form_submit" id="form_submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;$.validation.bindOnSubmit('sample_form', true);&lt;/script&gt;
+            </pre>
+            <h3>Standard Form Demo</h3>
+        <form name="sample_form" action="#" method="post" id="sample_form">
+            <div class="width_100 margin_bottom_10"><input type="text" name="your_name" id="your_name"
+                 placeholder="Enter your name." class="validate letters-only allow-spaces check-length"
+                 data-validation-length-min="3" data-validation-length-max="100">
+                <div id="your_name-message" class="error-message hidden">You must enter a name between 3 and 100 characters.</div>
+            </div>
+            <div class="width_100 margin_bottom_10"><input type="text" name="email" id="email" placeholder="Enter your email."
+                class="validate check-email" data-error-message="You must enter a valid email address.">
+                <div id="email-message" class="error-message hidden"></div></div>
+            <div class="width_100 margin_bottom_10"><input type="checkbox" name="my_checkbox" id="my_checkbox"
+                class="validate is-checked" data-error-message="This box must be checked."> Check this box.
+                <div id="my_checkbox-message" class="error-message hidden"></div>
+            </div>
+            <button type="submit" name="form_submit" id="form_submit">Submit</button>
+        </form>
+        </div>
+        <div class="container border_top margin_top_20">
+            <h3>JavaScript Form</h3>
+            <pre class="prettyprint width_100">
+&lt;div id="form_container"&gt;
+    &lt;div&gt;
+    
+    &lt;input type="text" name="your_email" id="your_email" placeholder="Enter your email."
+        class="validate check-email" data-error-message="You must enter a valid email address."&gt;
+    
+    &lt;div id="your_email-message" class="error-message hidden"&gt;&lt;/div&gt;
+    
+    &lt;/div&gt;
+    &lt;div&gt;
+    
+    &lt;input type="password" name="your_password" id="your_password"
+        placeholder="Enter your password." class="validate check-length" data-validation-length-min="8"
+        data-error-message="You must enter a password that is at least 8 characters long."&gt;
+    
+    &lt;div id="your_password-message" class="error-message hidden"&gt;&lt;/div&gt;
+    
+    &lt;/div&gt;
+    &lt;div&gt;
+
+        &lt;input type="password" name="your_password_match" id="your_password_match"
+        placeholder="Repeat your password." class="validate check-match" data-validation-match="your_password"
+        data-error-message="Passwords do not match"&gt;
+
+        &lt;div id="your_password_match-message" class="error-message hidden"&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;div&gt;
+    
+    &lt;select name="select_stuff" id="select_stuff" class="validate"
+        data-error-message="You must select something!"&gt;
+        &lt;option value=""&gt;Select something&lt;/option&gt;
+        &lt;option value="stuff"&gt;Stuff&lt;/option&gt;
+        &lt;option value="things"&gt;Things&lt;/option&gt;
+    &lt;/select&gt;
+        
+    &lt;div id="select_stuff-message" class="error-message hidden"&gt;&lt;/div&gt;
+    
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;button type="button" name="submit_form" id="submit_form"&gt;Submit&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// Will execute callback function when user presses return in an input field.
+$.validation.bindOnReturn('form_container', true, null, submitForm);
+
+// Catch the submit button click and call submit function
+$.validation.bind('form_container', 'click', 'submit_form', true, submitForm);
+
+function submitForm() {
+    // put your Ajax POST code here.
+    
+    // make sure that the validation plugin ran and the form passed the tests
+    if ($.validation.ran && $.validation.passed) {
+        var email = $('#your_email').val();
+        var password = $('#your_password').val();
+        var stuff = $('#select_stuff').val();
+        alert('Form passed validation! Values: '+email+':'+password+':'+stuff);
+    }
+}
+&lt;/script&gt;
+            </pre>
+            <h3>JavaScript Form Demo</h3>
+            <div id="form_container">
+                <div class="width_100 margin_bottom_10"><input type="text" name="your_email" id="your_email" placeholder="Enter your email." class="validate check-email" data-error-message="You must enter a valid email address."><div id="your_email-message" class="error-message hidden"></div></div>
+                <div class="width_100 margin_bottom_10"><input type="password" name="your_password" id="your_password" placeholder="Enter your password." class="validate check-length" data-validation-length-min="8" data-error-message="You must enter a password that is at least 8 characters long."><div id="your_password-message" class="error-message hidden"></div></div>
+                <div class="width_100 margin_bottom_10"><input type="password" name="your_password_match" id="your_password_match" placeholder="Repeat your password." class="validate check-match" data-validation-match="your_password" data-error-message="Passwords do not match"><div id="your_password_match-message" class="error-message hidden"></div></div>
+                <div class="width_100 margin_bottom_10"><select name="select_stuff" id="select_stuff" class="validate" data-error-message="You must select something!">
+                    <option value="">Select something</option>
+                    <option value="stuff">Stuff</option>
+                    <option value="things">Things</option>
+                    </select><div id="select_stuff-message" class="error-message hidden"></div></div>
+                <div class="width_100 margin_bottom_10"><button type="button" name="submit_form" id="submit_form">Submit</button></div>
+            </div>
+        </div>
+        <script src="js/run_prettify.js"></script>
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/validation.min.js"></script>
+        <script src="js/demo.js"></script>
+    </body>
+</html>

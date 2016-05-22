@@ -1,0 +1,17 @@
+/* 
+    Created on : May 18, 2016, 8:06:15 PM
+    Author     : Shawn Ewald <shawn.ewald@gmail.com>
+*/
+body {font-family: Arial,Helvetica Neue,Helvetica,sans-serif !important; font-style: normal !important; font-size: 14px !important; vertical-align: top !important; text-align: center;}
+form, input, select, button {padding: 4px;}
+input, select {border-radius: 6px; border: 1px solid lightskyblue; }
+button {border-radius: 6px; border: 1px solid lightgrey; background-color: lightskyblue;}
+.container {width: 1060px; margin: 0;margin-left: auto; margin-right: auto; padding: 0; text-align: left; vertical-align: top;}
+.correct-alert {border: #5cb85c solid 1px;}
+.error-alert {border: #a94442 solid 1px;}
+.error-message {color: #a94442; font-weight: bold;}
+.hidden {display: none !important;}
+.width_100 {width: 100%;}
+.margin_bottom_10 {margin-bottom: 10px;}
+.margin_top_20 {margin-top: 20px;}
+.border_top {border-top: 1px solid lightgray;}
