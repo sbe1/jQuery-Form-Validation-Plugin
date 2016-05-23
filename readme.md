@@ -14,7 +14,7 @@ Features:
 >
 > http://creativecommons.org/licenses/by-sa/4.0/
 
-> Please see demo/docs_and_demo.html for full documentation and demos.
+Please see demo/docs_and_demo.html for full documentation and demos.
 
 #### Sample usage on an HTML form:
 
