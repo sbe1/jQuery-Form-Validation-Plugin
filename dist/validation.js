@@ -34,11 +34,7 @@
          */
         bind: function (containerId, event, eventElementId, flagIfCorrect, callback, callbackArg) {
             $.validation.bindReset();
-                // Runs validation when user unfocuses from an input.
-                $('#' + containerId + ' .validate').on('blur', function () {
-                $.validation.reset(this);
-                $.validation.run(containerId, flagIfCorrect);
-            });
+            $.validation.bindBlur(containerId, flagIfCorrect);
             $('#' + eventElementId).on(event, function () {
                 $.validation.run(containerId, flagIfCorrect);
                 if (callback) { callback(callbackArg); }
@@ -52,11 +48,7 @@
          */
         bindOnSubmit: function (containerId, flagIfCorrect) {
             $.validation.bindReset();
-            // Runs validation when user unfocuses from an input.
-            $('#' + containerId + ' .validate').on('blur', function () {
-                $.validation.reset(this);
-                $.validation.run(containerId, flagIfCorrect);
-            });
+            $.validation.bindBlur(containerId, flagIfCorrect);
             $('#' + containerId).on('submit', function (e) {
                 $.validation.run(containerId, flagIfCorrect);
                 if (!$.validation.passed) { e.preventDefault(); }
@@ -73,11 +65,7 @@
          */
         bindOnReturn: function (containerId, flagIfCorrect, returnClass, callback, callbackArg) {
             $.validation.bindReset();
-            // Runs validation when user unfocuses from an input.
-            $('#' + containerId + ' .validate').on('blur', function () {
-                $.validation.reset(this);
-                $.validation.run(containerId, flagIfCorrect);
-            });
+            $.validation.bindBlur(containerId, flagIfCorrect);
             $('#' + containerId + ' ' + ((returnClass) ? '.' + returnClass : '.validate')).on('keyup', function (event) {
                 if (event.which === 13) {
                     $.validation.run(containerId, flagIfCorrect);
@@ -92,6 +80,13 @@
             $(el).each(function (i, el) {
                 if (!$.validation.passed) { return; }
                 $.validation.processElement(el, flagIfCorrect);
+            });
+        },
+        bindBlur: function (containerId, flagIfCorrect) {
+            // Runs validation when user unfocuses from an input.
+            $('#' + containerId + ' .validate').on('blur', function () {
+                $.validation.reset(this);
+                $.validation.run(containerId, flagIfCorrect);
             });
         },
         bindReset: function () {
