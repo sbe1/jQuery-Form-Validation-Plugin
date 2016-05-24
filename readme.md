@@ -49,7 +49,7 @@ Please see demo/docs_and_demo.html for full documentation and demos.
     <button type="submit" name="form_submit" id="form_submit">Submit</button>
 </form>
 
-<script>$.validation.bindOnSubmit('sample_form', true, true);</script>
+<script>$.validation.bindOnSubmit('sample_form', true);</script>
 ```
 
 #### Sample usage on a div container:
@@ -101,7 +101,7 @@ Please see demo/docs_and_demo.html for full documentation and demos.
 
 <script>
 // Will execute callback function when user presses return in an input field.
-$.validation.bindOnReturn('form_container', true, true, null, submitForm);
+$.validation.bindOnReturn('form_container', true, null, submitForm);
 
 // Catch the submit button click and call submit function
 $.validation.bind('form_container', 'click', 'submit_form', true, submitForm);
