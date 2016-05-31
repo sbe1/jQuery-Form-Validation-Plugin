@@ -108,7 +108,7 @@
             var value = isCheckbox ? null : $(el).val();
             var isNot = isCheckbox ? false : $.validation.checkIfNullOrEmpty(value);
             if ($.validation.passed) {
-                if (isNot) { pass = false; }
+                if (isNot) { pass = $(el).hasClass('allow-empty'); }
                 else {
                     var stop = false;
                     if (pass && isCheckbox && $(el).hasClass('is-checked') && !$.validation.checkIsChecked(el)) {

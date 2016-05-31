@@ -22,7 +22,9 @@
             <p>In order to use the plugin, you must supply certain attributes and classes in your form tags.</p>
             <h4>Required CSS Class: validate; Rquired tag attribute: id</h4>
             <p>All form input tags must include the CSS class <code>validate</code> to indicate to the plugin that it should validate this tag. At minimum, the validate tag will check if an input value is empty and display an error. You must also provide an <code>id</code> attribute that is unique from all other input ids so that the plugin can distinguish the input being validated from other inputs.</p><p>Ex: <code class="prettyprint">&lt;input type="text" name="my_input" id="my_input" class="validate" ... &gt;</code></p>
-            <h4>Optional CSS Classes: check-length, check-email, check-match, numbers-only, letters-only, alphanumeric-only, is-checked</h4>
+            <h4>Optional CSS Classes: allow-empty check-length, check-email, check-match, numbers-only, letters-only, alphanumeric-only, is-checked</h4>
+            <h4>allow-empty</h4>
+            <p>This is an improvement on the <code class="codepurple">required</code> tag attribute as it relates to form validation. Using the CSS class <code class="codegreen">allow-empty</code> tells the plugin to validate the field if there is user input, but flag it as having passed validation if there is no input. If the field is required, then simply adding <code class="codegreen">validate</code> covers that, no <code class="codepurple">required</code> attribute needed, and if the field is optional but you do want to validate the user input if a user decides to fill it in, then <code class="codegreen">validate allow-empty</code> takes care of that. This plugin assumes, rightly I think, that any form input you would want to validate would likely be required and it makes more sense to identify the presumably far fewer fields that are NOT required with <code class="codegreen">allow-empty</code>.</p>
             <h4>check-length</h4>
             <p>Checks the length of the input string. Requires at least one of the following <code>data</code> attributes <code>data-validation-length-min</code> and/or <code>data-validation-length-max</code>.</p><p>Ex: <code class="prettyprint">&lt;input type="text" name="my_input" id="my_input" class="validate check-length" data-validation-length-min="10" data-validation-length-max="100"  ... &gt;</code></p>
             <h4>check-email</h4>
@@ -195,6 +197,14 @@ if ($.validation.ran && $.validation.passed) {
     
     &lt;/div&gt;
     &lt;div&gt;
+
+    &lt;input type="text" name="alt_email" id="alt_email" placeholder="OPTIONAL: Enter an alternate email address"
+        class="validate allow-empty check-email" data-error-message="You must enter a valid email address."&gt;
+
+    &lt;div id="alt_email-message" class="error-message hidden"&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;div&gt;
     
     &lt;input type="password" name="your_password" id="your_password"
         placeholder="Enter your password." class="validate check-length" data-validation-length-min="8"
@@ -252,6 +262,7 @@ function submitForm() {
             <h3>JavaScript Form Demo</h3>
             <div id="form_container">
                 <div class="width_100 margin_bottom_10"><input type="text" name="your_email" id="your_email" placeholder="Enter your email." class="validate check-email" data-error-message="You must enter a valid email address."><div id="your_email-message" class="error-message hidden"></div></div>
+                <div class="width_100 margin_bottom_10"><input type="text" name="alt_email" id="alt_email" placeholder="OPTIONAL: Enter an alternate email address" class="validate allow-empty check-email" data-error-message="You must enter a valid email address."><div id="alt_email-message" class="error-message hidden"></div></div>
                 <div class="width_100 margin_bottom_10"><input type="password" name="your_password" id="your_password" placeholder="Enter your password." class="validate check-length" data-validation-length-min="8" data-error-message="You must enter a password that is at least 8 characters long."><div id="your_password-message" class="error-message hidden"></div></div>
                 <div class="width_100 margin_bottom_10"><input type="password" name="your_password_match" id="your_password_match" placeholder="Repeat your password." class="validate check-match" data-validation-match="your_password" data-error-message="Passwords do not match"><div id="your_password_match-message" class="error-message hidden"></div></div>
                 <div class="width_100 margin_bottom_10"><select name="select_stuff" id="select_stuff" class="validate" data-error-message="You must select something!">

@@ -15,3 +15,5 @@ button {border-radius: 6px; border: 1px solid lightgrey; background-color: light
 .margin_bottom_10 {margin-bottom: 10px;}
 .margin_top_20 {margin-top: 20px;}
 .border_top {border-top: 1px solid lightgray;}
+.codegreen {color: #080; }
+.codepurple {color: #606;}
