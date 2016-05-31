@@ -65,6 +65,14 @@ Please see demo/docs_and_demo.html for full documentation and demos.
     
     </div>
     <div>
+
+    <input type="text" name="alt_email" id="alt_email" placeholder="OPTIONAL: Enter an alternate email address"
+        class="validate allow-empty check-email" data-error-message="You must enter a valid email address.">
+
+    <div id="alt_email-message" class="error-message hidden"></div>
+
+    </div>
+    <div>
     
     <input type="password" name="your_password" id="your_password"
         placeholder="Enter your password." class="validate check-length" data-validation-length-min="8"
