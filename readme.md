@@ -118,7 +118,7 @@ function submitForm() {
     // put your Ajax POST code here.
     
     // make sure that the validation plugin ran and the form passed the tests
-    if ($.validation.ran && $.validation.passed) {
+    if ($.validation.passed) {
         var email = $('#your_email').val();
         var password = $('#your_password').val();
         var stuff = $('#select_stuff').val();

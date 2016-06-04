@@ -118,14 +118,12 @@ var eventElementId = 'submit_form'; // In this case, we're listening for a click
 $.validation.bind('form_container', 'click', 'submit_form', flagIfCorrect, callbackFunction, functionArgs);
 &lt;/script&gt;</pre>
             <h3>Plugin Properties</h3>
-            <p>There are two useful plugin properties that you can use in your on scripts to check if validation has been run on the form and if the inputs passed validation.</p>
-            <h4>$.validation.ran</h4>
-            <p>Contains a boolean value. Boolean true if validation ran on the form, boolean false if not.</p>
+            <p>There is one useful plugin property that you can use in your on scripts to check if validation has been run on the form and if the inputs passed validation.</p>
             <h4>$.validation.passed</h4>
-            <p>Contains a boolean value. Boolean true if all inputs passed validation, boolean false if not.</p>
+            <p>Contains a boolean value. Boolean true if validation ran and all inputs passed validation, boolean false if not.</p>
             <p>Example usage:</p>
             <pre class="prettyprint">
-if ($.validation.ran && $.validation.passed) {
+if ($.validation.passed) {
    // do something
 }
             </pre>
@@ -250,7 +248,7 @@ function submitForm() {
     // put your Ajax POST code here.
     
     // make sure that the validation plugin ran and the form passed the tests
-    if ($.validation.ran && $.validation.passed) {
+    if ($.validation.passed) {
         var email = $('#your_email').val();
         var password = $('#your_password').val();
         var stuff = $('#select_stuff').val();

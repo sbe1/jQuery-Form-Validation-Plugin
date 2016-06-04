@@ -3,7 +3,7 @@ $.validation.bindOnSubmit('sample_form', true);
 // You won't need to add something like this with a real form.
 $('#sample_form').on('submit', function (e) {
     e.preventDefault();
-    if ($.validation.ran && $.validation.passed) {
+    if ($.validation.passed) {
         alert('This form would have submitted successfully because it passed validation.');
     }
 });
@@ -17,7 +17,7 @@ function submitForm () {
     // put your Ajax POST code here.
 
     // make sure that the validation plugin ran and the form passed the tests
-    if ($.validation.ran && $.validation.passed) {
+    if ($.validation.passed) {
         var email = $('#your_email').val();
         var password = $('#your_password').val();
         var stuff = $('#select_stuff').val();

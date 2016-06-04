@@ -19,8 +19,7 @@
  */
 (function ($) {
     $.validation = {
-        ran: false,
-        passed: true,
+        passed: false,
         resetCalled: false,
         /**
          * Bind validation to an event.
@@ -75,7 +74,6 @@
         },
         run: function (id, flagIfCorrect) {
             $.validation.passed = true;
-            $.validation.ran = true;
             var el = $('#' + id + ' .validate');
             $(el).each(function (i, el) {
                 if (!$.validation.passed) { return; }
